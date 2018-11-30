@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
+using Microservice.Application.Providers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -39,15 +40,22 @@ namespace Microservice.Application
                     Newtonsoft.Json.NullValueHandling.Ignore;
             });
 
-            //Configura o modo de compressão
-            services.Configure<GzipCompressionProviderOptions>(
-                options => options.Level = CompressionLevel.Optimal);
-
+            // Configura o modo de compressão
             services.AddResponseCompression(options =>
             {
-                options.Providers.Add<GzipCompressionProvider>();
+                options.Providers.Add<BrotliCompressionProvider>();
                 options.EnableForHttps = true;
             });
+
+            // //Configura o modo de compressão
+            // services.Configure<GzipCompressionProviderOptions>(
+            //     options => options.Level = CompressionLevel.Optimal);
+
+            // services.AddResponseCompression(options =>
+            // {
+            //     options.Providers.Add<GzipCompressionProvider>();
+            //     options.EnableForHttps = true;
+            // });
 
             //Swagger
             services.AddSwaggerGen(c =>
@@ -94,8 +102,12 @@ namespace Microservice.Application
             }
 
             app.UseHttpsRedirection();
+            // Ativa a compressão
+            app.UseResponseCompression();
             app.UseMvc();
             app.UseStaticFiles();
+
+            
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();

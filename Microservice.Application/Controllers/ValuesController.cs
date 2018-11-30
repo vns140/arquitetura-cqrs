@@ -12,17 +12,25 @@ namespace Microservice.Application.Controllers
     {
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<string>> Get(int number)
         {
-            return new string[] { "value1", "value2" };
+            return new string[] { 
+                "value1", "value1","value1","value1","value1","value1","value1","value1",
+                "value1","value1","value1","value1","value1","value1","value1","value1",
+                "value1","value1","value1","value1","value1","value1","value1","value1",
+                "value1","value1","value1","value1","value1","value1","value1","value1",
+                "value1","value1","value1","value1","value1","value1","value1","value1",
+                "value1","value1","value1","value1","value1","value1","value1","value1",
+                "value1", "value1","value1","value1","value1","value1","value1","value1",
+                "value1","value1","value1","value1","value1","value1","value1","value1",
+                "value1","value1","value1","value1","value1","value1","value1","value1",
+                "value1","value1","value1","value1","value1","value1","value1","value1",
+                "value1","value1","value1","value1","value1","value1","value1","value1",
+                "value1","value1","value1","value1","value1","value1","value1","value1",
+                "value2" };
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
-        {
-            return "value";
-        }
+        
 
         // POST api/values
         [HttpPost]
